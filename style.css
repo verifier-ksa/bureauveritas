@@ -2,98 +2,101 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
     font-family: Arial, sans-serif;
 }
 
-/* FULL SCREEN */
-body {
-    height: 100vh;
-    overflow: hidden;
-    background: url('Background.png') no-repeat center center;
+/* BACKGROUND */
+.main-container {
+    background: url('Background.png') no-repeat center top;
     background-size: cover;
-}
-
-/* PAGE LAYOUT */
-.page {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    padding: 20px;
 }
 
-/* SEARCH CARD */
-.search-card {
-    margin-top: 120px; /* নিচে নামানো */
-    background: white;
-    padding: 25px;
-    border-radius: 20px;
-    width: 100%;
+/* CENTER CONTENT */
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 35vh;
+}
+
+/* CARD */
+.card {
+    width: 90%;
     max-width: 380px;
+    background: #eee;
+    padding: 20px;
+    border-radius: 15px;
     text-align: center;
 }
 
-.search-card input {
-    width: 100%;
-    padding: 12px;
-    margin-top: 15px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+/* SEARCH BOX নিচে নামানো */
+.search-box {
+    margin-top: 40px;
 }
 
-.search-btn {
-    margin-top: 20px;
+/* RESULT BOX নিচে + ছোট */
+.result-box {
+    margin-top: 60px;
+    padding: 15px;
+}
+
+/* INPUT */
+input {
     width: 100%;
-    padding: 14px;
-    background: #002195;
+    padding: 12px;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #0d2c8b;
     color: white;
     border: none;
     border-radius: 6px;
     font-weight: bold;
 }
 
-/* RESULT CARD (FLAT DESIGN) */
-.result-card {
-    margin-top: 60px;
-    background: #e5e5e5;
-    width: 100%;
-    max-width: 420px;
-    height: 75vh; /* screen fit */
-    border-radius: 25px;
-    padding: 20px;
-}
-
-/* ICON */
-.status-circle {
-    width: 65px;
-    height: 65px;
-    background: #4CAF50;
+/* CHECK ICON */
+.check {
+    background: green;
     color: white;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    text-align: center;
-    line-height: 65px;
-    font-size: 28px;
-    margin: 0 auto 15px;
+    margin: auto;
+    line-height: 50px;
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
 /* DATA */
-#result-data {
-    font-size: 13px;
-}
-
 .data-item {
-    margin-bottom: 10px;
+    font-size: 13px;
+    margin: 6px 0;
+    text-align: left;
 }
 
-.label {
-    font-weight: bold;
-}
-
-/* FOOTER */
+/* FOOTER নিচে */
 .footer {
-    margin-bottom: 10px;
-    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+}
+
+.footer a {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
 }
 
 /* HIDE */
