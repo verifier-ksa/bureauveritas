@@ -5,28 +5,30 @@
     font-family: Arial, sans-serif;
 }
 
-/* FULL SCREEN NO SCROLL */
+/* FULL SCREEN */
 body {
     height: 100vh;
     overflow: hidden;
-    background: url('Background.png') no-repeat center bottom;
+    background: url('Background.png') no-repeat center center;
     background-size: cover;
 }
 
-/* CENTER SYSTEM */
-.content-view {
+/* PAGE LAYOUT */
+.page {
     height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    padding: 15px;
+    padding: 20px;
 }
 
-/* SEARCH BOX */
+/* SEARCH CARD */
 .search-card {
+    margin-top: 120px; /* নিচে নামানো */
     background: white;
     padding: 25px;
-    border-radius: 15px;
+    border-radius: 20px;
     width: 100%;
     max-width: 380px;
     text-align: center;
@@ -37,60 +39,61 @@ body {
     padding: 12px;
     margin-top: 15px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 6px;
 }
 
 .search-btn {
-    margin-top: 15px;
+    margin-top: 20px;
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     background: #002195;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     font-weight: bold;
 }
 
-/* RESULT CARD (MAIN DESIGN) */
+/* RESULT CARD (FLAT DESIGN) */
 .result-card {
-    background: #e6e6e6;
+    margin-top: 60px;
+    background: #e5e5e5;
     width: 100%;
     max-width: 420px;
-    height: 80vh; /* fixed height */
-    border-radius: 20px;
+    height: 75vh; /* screen fit */
+    border-radius: 25px;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
 }
 
-/* STATUS ICON */
+/* ICON */
 .status-circle {
-    width: 70px;
-    height: 70px;
+    width: 65px;
+    height: 65px;
     background: #4CAF50;
     color: white;
     border-radius: 50%;
     text-align: center;
-    line-height: 70px;
-    font-size: 30px;
-    margin: 0 auto 20px;
+    line-height: 65px;
+    font-size: 28px;
+    margin: 0 auto 15px;
 }
 
-/* DATA STYLE */
+/* DATA */
 #result-data {
-    flex: 1;
-    overflow: hidden; /* no scroll */
+    font-size: 13px;
 }
 
 .data-item {
-    margin-bottom: 12px;
-    font-size: 14px;
+    margin-bottom: 10px;
 }
 
 .label {
     font-weight: bold;
-    display: block;
+}
+
+/* FOOTER */
+.footer {
+    margin-bottom: 10px;
+    font-size: 14px;
 }
 
 /* HIDE */
