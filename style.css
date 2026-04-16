@@ -2,101 +2,95 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
     font-family: Arial, sans-serif;
 }
 
-/* BACKGROUND */
-.main-container {
-    background: url('Background.png') no-repeat center top;
+/* FULL SCREEN NO SCROLL */
+body {
+    height: 100vh;
+    overflow: hidden;
+    background: url('Background.png') no-repeat center bottom;
     background-size: cover;
+}
+
+/* CENTER SYSTEM */
+.content-view {
     height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-/* CENTER CONTENT */
-.content {
-    display: flex;
     justify-content: center;
-    align-items: flex-start;
-    padding-top: 35vh;
-}
-
-/* CARD */
-.card {
-    width: 90%;
-    max-width: 380px;
-    background: #eee;
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-}
-
-/* SEARCH BOX নিচে নামানো */
-.search-box {
-    margin-top: 40px;
-}
-
-/* RESULT BOX নিচে + ছোট */
-.result-box {
-    margin-top: 60px;
+    align-items: center;
     padding: 15px;
 }
 
-/* INPUT */
-input {
+/* SEARCH BOX */
+.search-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+}
+
+.search-card input {
     width: 100%;
     padding: 12px;
-    margin: 15px 0;
+    margin-top: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-/* BUTTON */
-button {
+.search-btn {
+    margin-top: 15px;
     width: 100%;
     padding: 12px;
-    background: #0d2c8b;
+    background: #002195;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 5px;
     font-weight: bold;
 }
 
-/* CHECK ICON */
-.check {
-    background: green;
+/* RESULT CARD (MAIN DESIGN) */
+.result-card {
+    background: #e6e6e6;
+    width: 100%;
+    max-width: 420px;
+    height: 80vh; /* fixed height */
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* STATUS ICON */
+.status-circle {
+    width: 70px;
+    height: 70px;
+    background: #4CAF50;
     color: white;
-    width: 50px;
-    height: 50px;
     border-radius: 50%;
-    margin: auto;
-    line-height: 50px;
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-/* DATA */
-.data-item {
-    font-size: 13px;
-    margin: 6px 0;
-    text-align: left;
-}
-
-/* FOOTER নিচে */
-.footer {
     text-align: center;
-    padding: 10px;
+    line-height: 70px;
+    font-size: 30px;
+    margin: 0 auto 20px;
 }
 
-.footer a {
-    text-decoration: none;
+/* DATA STYLE */
+#result-data {
+    flex: 1;
+    overflow: hidden; /* no scroll */
+}
+
+.data-item {
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.label {
     font-weight: bold;
-    color: black;
+    display: block;
 }
 
 /* HIDE */
