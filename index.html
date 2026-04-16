@@ -4,41 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Certificate Verification</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
-<div class="main-container">
+<!-- SEARCH -->
+<div id="search-section" class="content-view">
+    <div class="search-card">
+        <h3>Please search your e-document by filling the document number.</h3>
 
-    <!-- SEARCH -->
-    <div id="search-section" class="content">
-        <div class="card search-box">
-            <h3>Please search your e-document by filling the document number.</h3>
+        <input type="text" id="cert-number" placeholder="e.g. 148-2026-022489-EN">
 
-            <input type="text" id="cert-number" placeholder="e.g. 148-2026-022489-EN">
-
-            <button onclick="verifyCertificate()">Search Certificate</button>
-        </div>
+        <button class="search-btn" onclick="verifyCertificate()">Search Certificate</button>
     </div>
-
-    <!-- RESULT -->
-    <div id="result-section" class="content hidden">
-        <div class="card result-box">
-            <div class="check">✔</div>
-            <div id="result-data"></div>
-        </div>
-    </div>
-
-    <!-- FOOTER -->
-    <div class="footer">
-        <a href="https://group.bureauveritas.com/" target="_blank">
-            Visit Bureau Veritas Website
-        </a>
-    </div>
-
 </div>
 
-<script src="script.js"></script>
+<!-- RESULT -->
+<div id="result-section" class="content-view hidden">
+    <div class="result-card">
+        <div class="status-circle">✔</div>
+        <div id="result-data"></div>
+    </div>
+</div>
+
+<script src="./script.js"></script>
 </body>
 </html>
