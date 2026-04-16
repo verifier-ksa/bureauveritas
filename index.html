@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Certificate Verification</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container">
+        
+        <!-- Search Section -->
+        <div id="search-section" class="content-view">
+            <div class="search-card">
+                <h3>Please search your e-document by filling the document number.</h3>
+                <div class="input-group">
+                    <div class="label-box">Document number</div>
+                    <input type="text" id="cert-number" placeholder="e.g. 148-2026-022489-EN" value="">
+                    <button id="search-trigger" onclick="verifyCertificate()">🔍</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Section -->
+        <div id="result-section" class="content-view hidden">
+            <div class="search-card result-box">
+                <div class="status-icon">✔️</div>
+                <div id="result-data"></div>
+                <p class="warning-text">For any further information on this document, please contact the issuer of the document.</p>
+            </div>
+        </div>
+
+        <footer class="footer-fixed">
+            <a href="https://group.bureauveritas.com/" target="_blank">Visit Bureau Veritas Website</a>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
