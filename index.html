@@ -1,46 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificate Verification</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificate Verification</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="main-container">
-
-    <!-- SEARCH SECTION -->
-    <div id="search-section" class="content-view">
-        <div class="search-card">
-            <h3>Please search your e-document by filling the document number.</h3>
-
-            <div class="input-group">
-                <div class="label-box">Document number</div>
-                <input type="text" id="cert-number" placeholder="e.g. 148-2026-022489-EN">
-                <button id="search-trigger" onclick="verifyCertificate()">🔍</button>
-            </div>
+<!-- HEADER -->
+<div class="header">
+    <div class="header-content">
+        <div class="logo">🔍</div>
+        <div>
+            <h2>Authenticate your document</h2>
+            <p>Thank you for submitting your document for verification.<br>
+            Please find below the answer to your request.</p>
         </div>
     </div>
+</div>
 
-    <!-- RESULT SECTION -->
-    <div id="result-section" class="content-view hidden">
-        <div class="search-card result-box">
-            <div class="status-icon">✔️</div>
-            <div id="result-data"></div>
-            <p class="warning-text">
-                For any further information on this document, please contact the issuer.
-            </p>
-        </div>
+<!-- SEARCH BOX -->
+<div id="search-section" class="content-view">
+    <div class="search-card">
+        <h3>Please search your e-document by filling the document number.</h3>
+
+        <input type="text" id="cert-number" placeholder="e.g. 148-2026-022489-EN">
+
+        <button class="search-btn" onclick="verifyCertificate()">Search Certificate</button>
     </div>
+</div>
 
-    <!-- FOOTER -->
-    <footer class="footer-fixed">
-        <a href="https://group.bureauveritas.com/" target="_blank">
-            Visit Bureau Veritas Website
-        </a>
-    </footer>
+<!-- RESULT -->
+<div id="result-section" class="content-view hidden">
+    <div class="result-card">
+        <div class="status-circle">✔</div>
+        <div id="result-data"></div>
 
+        <p class="warning">
+            For any further information on this document, please contact the issuer of the document.
+        </p>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    Visit <b>Bureau Veritas Website</b>
 </div>
 
 <script src="script.js"></script>
