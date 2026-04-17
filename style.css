@@ -5,21 +5,21 @@
     font-family: Arial, sans-serif;
 }
 
-/* FULL SCREEN NO SCROLL */
+/* BODY (SCROLL ENABLE) */
 body {
     height: 100vh;
-    overflow: hidden;
+    overflow-y: auto;   /* ✅ এখন pull করলে reload হবে */
     background: url('Background.png') no-repeat center bottom;
     background-size: cover;
 }
 
-/* CENTER SYSTEM */
+/* CONTENT POSITION (UPPER SIDE) */
 .content-view {
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 15px;
+    align-items: flex-start;   /* ✅ মাঝখান না, উপরে */
+    padding-top: 120px;        /* ✅ বক্স নিচে নামানো */
 }
 
 /* SEARCH BOX */
@@ -51,17 +51,16 @@ body {
     font-weight: bold;
 }
 
-/* RESULT CARD (MAIN DESIGN) */
+/* RESULT CARD */
 .result-card {
     background: #e6e6e6;
     width: 100%;
     max-width: 420px;
-    height: 80vh; /* fixed height */
+    height: 80vh;
     border-radius: 20px;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
 }
 
 /* STATUS ICON */
@@ -77,10 +76,10 @@ body {
     margin: 0 auto 20px;
 }
 
-/* DATA STYLE */
+/* DATA */
 #result-data {
     flex: 1;
-    overflow: hidden; /* no scroll */
+    overflow-y: auto;   /* ✅ দরকার হলে ভেতরে scroll */
 }
 
 .data-item {
