@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verifier</title>
+<title>Certificate Verifier</title>
 
 <style>
 
@@ -18,12 +18,12 @@
 /* BODY */
 body {
     height: 100vh;
-    overflow-y: auto; /* pull refresh ON */
+    overflow-y: auto;
     background: url('Background.png') no-repeat center top;
     background-size: cover;
 }
 
-/* MAIN CONTAINER */
+/* CONTAINER */
 .content-view {
     min-height: 100vh;
     display: flex;
@@ -33,7 +33,7 @@ body {
     padding-bottom: 80px;
 }
 
-/* SEARCH CARD */
+/* SEARCH */
 .search-card {
     background: white;
     padding: 25px;
@@ -62,13 +62,14 @@ body {
     font-weight: bold;
 }
 
-/* RESULT CARD */
+/* RESULT */
 .result-card {
     background: #e6e6e6;
     width: 95%;
     max-width: 420px;
     border-radius: 20px;
     overflow: hidden;
+    max-height: 75vh;
 }
 
 /* TOP AREA */
@@ -78,7 +79,6 @@ body {
     text-align: center;
 }
 
-/* CHECK ICON */
 .status-circle {
     width: 65px;
     height: 65px;
@@ -92,26 +92,19 @@ body {
 
 /* DATA */
 #result-data {
-    padding: 20px;
+    padding: 15px;
 }
 
 .data-item {
-    margin-bottom: 12px;
-    font-size: 14px;
+    margin-bottom: 8px;
+    font-size: 13px;
 }
 
 .label {
     font-weight: bold;
 }
 
-/* FOOTER TEXT */
-.footer-text {
-    padding: 0 20px 20px;
-    font-size: 12px;
-    color: #444;
-}
-
-/* VISIT WEBSITE FIXED */
+/* FOOTER */
 .footer {
     position: fixed;
     bottom: 10px;
@@ -155,15 +148,11 @@ body {
 
         <div id="result-data"></div>
 
-        <div class="footer-text">
-            For any further information on this document, please contact the issuer of the document.
-        </div>
-
     </div>
 
 </div>
 
-<!-- VISIT WEBSITE -->
+<!-- FOOTER -->
 <div class="footer">
     <a href="https://group.bureauveritas.com/" target="_blank">
         Visit Bureau Veritas Website
@@ -172,35 +161,48 @@ body {
 
 <script>
 
-function searchDoc() {
+async function searchDoc() {
+
     let input = document.getElementById("docInput").value.trim();
 
-    if(input === "") {
+    if (input === "") {
         alert("Please enter document number");
         return;
     }
 
-    // hide search
-    document.getElementById("search-box").classList.add("hidden");
+    try {
+        let res = await fetch("data.json");
+        let data = await res.json();
 
-    // show result
-    document.getElementById("result-box").classList.remove("hidden");
+        let found = data.find(item => item.id === input);
 
-    // DATA (STATIC - তুমি চাইলে JSON থেকে আনতে পারো)
-    document.getElementById("result-data").innerHTML = `
-        <div class="data-item"><span class="label">Deliverable Id :</span><br>148-2026-022489-EN</div>
-        <div class="data-item"><span class="label">Published on :</span><br>06/04/2026</div>
-        <div class="data-item"><span class="label">QR Code Status :</span><br><span style="color:green;">Validated</span></div>
-        <div class="data-item"><span class="label">NAME :</span><br>MD MOHI UDDIN</div>
-        <div class="data-item"><span class="label">ID :</span><br>2612312765</div>
-        <div class="data-item"><span class="label">ISSUED ON :</span><br>06/04/2026</div>
-        <div class="data-item"><span class="label">VALID UNTIL :</span><br>05/04/2027</div>
-        <div class="data-item"><span class="label">TYPE :</span><br>SCAFFOLDING ERECTOR AND DISMANTLER</div>
-        <div class="data-item"><span class="label">MODEL :</span><br>N/A</div>
-        <div class="data-item"><span class="label">COMPANY :</span><br>PRIVATE</div>
-        <div class="data-item"><span class="label">TRAINING LOCATION :</span><br>JUBAIL</div>
-        <div class="data-item"><span class="label">TRAINER :</span><br>ZEESHAN KHAN</div>
-    `;
+        if (!found) {
+            alert("Invalid Certificate Number ❌");
+            return;
+        }
+
+        document.getElementById("search-box").classList.add("hidden");
+        document.getElementById("result-box").classList.remove("hidden");
+
+        document.getElementById("result-data").innerHTML = `
+            <div class="data-item"><span class="label">Deliverable Id :</span><br>${found.id}</div>
+            <div class="data-item"><span class="label">Published on :</span><br>${found.published}</div>
+            <div class="data-item"><span class="label">QR Code Status :</span><br><span style="color:green;">Validated</span></div>
+            <div class="data-item"><span class="label">NAME :</span><br>${found.name}</div>
+            <div class="data-item"><span class="label">ID :</span><br>${found.nid}</div>
+            <div class="data-item"><span class="label">ISSUED ON :</span><br>${found.issued}</div>
+            <div class="data-item"><span class="label">VALID UNTIL :</span><br>${found.valid}</div>
+            <div class="data-item"><span class="label">TYPE :</span><br>${found.type}</div>
+            <div class="data-item"><span class="label">MODEL :</span><br>${found.model}</div>
+            <div class="data-item"><span class="label">COMPANY :</span><br>${found.company}</div>
+            <div class="data-item"><span class="label">TRAINING LOCATION :</span><br>${found.location}</div>
+            <div class="data-item"><span class="label">TRAINER :</span><br>${found.trainer}</div>
+        `;
+
+    } catch (e) {
+        alert("Error loading data.json");
+        console.log(e);
+    }
 }
 
 </script>
