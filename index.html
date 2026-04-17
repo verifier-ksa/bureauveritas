@@ -3,8 +3,134 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Certificate Verification</title>
-<link rel="stylesheet" href="style.css">
+<title>Verifier</title>
+
+<style>
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* BODY */
+body {
+    height: 100vh;
+    overflow-y: auto; /* pull refresh ON */
+    background: url('Background.png') no-repeat center top;
+    background-size: cover;
+}
+
+/* MAIN CONTAINER */
+.content-view {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 120px;
+    padding-bottom: 80px;
+}
+
+/* SEARCH CARD */
+.search-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    width: 95%;
+    max-width: 380px;
+    text-align: center;
+}
+
+.search-card input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-btn {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    background: #002195;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* RESULT CARD */
+.result-card {
+    background: #e6e6e6;
+    width: 95%;
+    max-width: 420px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* TOP AREA */
+.top-area {
+    background: linear-gradient(#9e9e9e, #bdbdbd);
+    padding: 20px;
+    text-align: center;
+}
+
+/* CHECK ICON */
+.status-circle {
+    width: 65px;
+    height: 65px;
+    background: #4CAF50;
+    color: white;
+    border-radius: 50%;
+    line-height: 65px;
+    font-size: 30px;
+    margin: auto;
+}
+
+/* DATA */
+#result-data {
+    padding: 20px;
+}
+
+.data-item {
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+/* FOOTER TEXT */
+.footer-text {
+    padding: 0 20px 20px;
+    font-size: 12px;
+    color: #444;
+}
+
+/* VISIT WEBSITE FIXED */
+.footer {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.footer a {
+    text-decoration: none;
+    color: black;
+}
+
+/* HIDE */
+.hidden {
+    display: none;
+}
+
+</style>
 </head>
 
 <body>
@@ -12,38 +138,72 @@
 <div class="content-view">
 
     <!-- SEARCH -->
-    <div id="search-section" class="search-card">
+    <div id="search-box" class="search-card">
         <h3>Please search your e-document by filling the document number.</h3>
 
-        <input type="text" id="cert-number" placeholder="e.g. 148-2026-022489-EN">
+        <input type="text" id="docInput" placeholder="Enter document number">
 
-        <button class="search-btn" onclick="verifyCertificate()">Search Certificate</button>
+        <button class="search-btn" onclick="searchDoc()">Search Certificate</button>
     </div>
 
     <!-- RESULT -->
-    <div id="result-section" class="result-card hidden">
+    <div id="result-box" class="result-card hidden">
 
         <div class="top-area">
-            <div class="status-circle">✔</div>
+            <div class="status-circle">✓</div>
         </div>
 
         <div id="result-data"></div>
 
-        <p class="footer-text">
+        <div class="footer-text">
             For any further information on this document, please contact the issuer of the document.
-        </p>
+        </div>
 
     </div>
 
 </div>
 
-<!-- 🔥 নিচের লিংক -->
+<!-- VISIT WEBSITE -->
 <div class="footer">
     <a href="https://group.bureauveritas.com/" target="_blank">
         Visit Bureau Veritas Website
     </a>
 </div>
 
-<script src="script.js"></script>
+<script>
+
+function searchDoc() {
+    let input = document.getElementById("docInput").value.trim();
+
+    if(input === "") {
+        alert("Please enter document number");
+        return;
+    }
+
+    // hide search
+    document.getElementById("search-box").classList.add("hidden");
+
+    // show result
+    document.getElementById("result-box").classList.remove("hidden");
+
+    // DATA (STATIC - তুমি চাইলে JSON থেকে আনতে পারো)
+    document.getElementById("result-data").innerHTML = `
+        <div class="data-item"><span class="label">Deliverable Id :</span><br>148-2026-022489-EN</div>
+        <div class="data-item"><span class="label">Published on :</span><br>06/04/2026</div>
+        <div class="data-item"><span class="label">QR Code Status :</span><br><span style="color:green;">Validated</span></div>
+        <div class="data-item"><span class="label">NAME :</span><br>MD MOHI UDDIN</div>
+        <div class="data-item"><span class="label">ID :</span><br>2612312765</div>
+        <div class="data-item"><span class="label">ISSUED ON :</span><br>06/04/2026</div>
+        <div class="data-item"><span class="label">VALID UNTIL :</span><br>05/04/2027</div>
+        <div class="data-item"><span class="label">TYPE :</span><br>SCAFFOLDING ERECTOR AND DISMANTLER</div>
+        <div class="data-item"><span class="label">MODEL :</span><br>N/A</div>
+        <div class="data-item"><span class="label">COMPANY :</span><br>PRIVATE</div>
+        <div class="data-item"><span class="label">TRAINING LOCATION :</span><br>JUBAIL</div>
+        <div class="data-item"><span class="label">TRAINER :</span><br>ZEESHAN KHAN</div>
+    `;
+}
+
+</script>
+
 </body>
 </html>
