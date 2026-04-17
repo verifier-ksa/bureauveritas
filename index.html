@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Certificate Verifier</title>
+<title>Verifier</title>
 
 <style>
-
-/* RESET */
 * {
     margin: 0;
     padding: 0;
@@ -15,7 +13,6 @@
     font-family: Arial, sans-serif;
 }
 
-/* BODY */
 body {
     height: 100vh;
     overflow-y: auto;
@@ -23,14 +20,13 @@ body {
     background-size: cover;
 }
 
-/* CONTAINER */
+/* CENTER */
 .content-view {
-    min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 120px;
-    padding-bottom: 80px;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 130px;
+    padding-bottom: 10px;
 }
 
 /* SEARCH */
@@ -38,7 +34,7 @@ body {
     background: white;
     padding: 25px;
     border-radius: 15px;
-    width: 95%;
+    width: 90%;
     max-width: 380px;
     text-align: center;
 }
@@ -62,67 +58,69 @@ body {
     font-weight: bold;
 }
 
-/* RESULT */
+/* RESULT CARD */
 .result-card {
     background: #e6e6e6;
-    width: 95%;
+    width: 94%;
     max-width: 420px;
-    border-radius: 20px;
+    border-radius: 25px;
     overflow: hidden;
-    max-height: 75vh;
 }
 
-/* TOP AREA */
 .top-area {
-    background: linear-gradient(#9e9e9e, #bdbdbd);
-    padding: 20px;
+    background: linear-gradient(to bottom, #9e9e9e, #cfcfcf);
+    padding: 20px 0;
     text-align: center;
 }
 
 .status-circle {
-    width: 65px;
-    height: 65px;
+    width: 60px;
+    height: 60px;
     background: #4CAF50;
     color: white;
     border-radius: 50%;
-    line-height: 65px;
-    font-size: 30px;
+    line-height: 60px;
+    font-size: 28px;
     margin: auto;
+    box-shadow: 0 0 0 4px #e6e6e6;
 }
 
-/* DATA */
 #result-data {
-    padding: 15px;
+    padding: 18px;
 }
 
 .data-item {
-    margin-bottom: 8px;
-    font-size: 13px;
+    margin-bottom: 10px;
+    font-size: 14px;
 }
 
 .label {
     font-weight: bold;
+    display: block;
 }
 
-/* FOOTER */
+.footer-text {
+    padding: 0 18px 18px;
+    font-size: 12px;
+    color: #333;
+}
+
+/* BOTTOM LINK */
 .footer {
-    position: fixed;
-    bottom: 10px;
-    width: 100%;
     text-align: center;
-    font-weight: bold;
+    margin-top: 8px;
+    padding-bottom: 15px;
 }
 
 .footer a {
     text-decoration: none;
+    font-weight: bold;
     color: black;
 }
 
-/* HIDE */
 .hidden {
     display: none;
 }
-
 </style>
 </head>
 
@@ -131,16 +129,15 @@ body {
 <div class="content-view">
 
     <!-- SEARCH -->
-    <div id="search-box" class="search-card">
+    <div class="search-card" id="search-box">
         <h3>Please search your e-document by filling the document number.</h3>
 
-        <input type="text" id="docInput" placeholder="Enter document number">
-
-        <button class="search-btn" onclick="searchDoc()">Search Certificate</button>
+        <input type="text" id="certInput" placeholder="">
+        <button class="search-btn" onclick="searchCert()">Search Certificate</button>
     </div>
 
     <!-- RESULT -->
-    <div id="result-box" class="result-card hidden">
+    <div class="result-card hidden" id="result-box">
 
         <div class="top-area">
             <div class="status-circle">✓</div>
@@ -148,11 +145,15 @@ body {
 
         <div id="result-data"></div>
 
+        <div class="footer-text">
+            For any further information on this document, please contact the issuer of the document.
+        </div>
+
     </div>
 
 </div>
 
-<!-- FOOTER -->
+<!-- BOTTOM WEBSITE -->
 <div class="footer">
     <a href="https://group.bureauveritas.com/" target="_blank">
         Visit Bureau Veritas Website
@@ -160,51 +161,47 @@ body {
 </div>
 
 <script>
+async function searchCert() {
+    const input = document.getElementById("certInput").value.trim();
 
-async function searchDoc() {
-
-    let input = document.getElementById("docInput").value.trim();
-
-    if (input === "") {
-        alert("Please enter document number");
+    if (!input) {
+        alert("Enter certificate number");
         return;
     }
 
     try {
-        let res = await fetch("data.json");
-        let data = await res.json();
+        const res = await fetch("data.json");
+        const data = await res.json();
 
-        let found = data.find(item => item.id === input);
+        const result = data.find(item => item.id === input);
 
-        if (!found) {
-            alert("Invalid Certificate Number ❌");
-            return;
+        if (result) {
+            document.getElementById("search-box").classList.add("hidden");
+            document.getElementById("result-box").classList.remove("hidden");
+
+            document.getElementById("result-data").innerHTML = `
+                <div class="data-item"><span class="label">Deliverable Id :</span> ${result.id}</div>
+                <div class="data-item"><span class="label">Published on :</span> ${result.published}</div>
+                <div class="data-item"><span class="label">QR Code Status :</span> <span style="color:green;">Validated</span></div>
+
+                <div class="data-item"><span class="label">NAME :</span> ${result.name}</div>
+                <div class="data-item"><span class="label">ID :</span> ${result.userId}</div>
+                <div class="data-item"><span class="label">ISSUED ON :</span> ${result.issued}</div>
+                <div class="data-item"><span class="label">VALID UNTIL :</span> ${result.valid}</div>
+                <div class="data-item"><span class="label">TYPE :</span> ${result.type}</div>
+                <div class="data-item"><span class="label">MODEL :</span> ${result.model}</div>
+                <div class="data-item"><span class="label">COMPANY :</span> ${result.company}</div>
+                <div class="data-item"><span class="label">TRAINING LOCATION :</span> ${result.location}</div>
+                <div class="data-item"><span class="label">TRAINER :</span> ${result.trainer}</div>
+            `;
+        } else {
+            alert("Certificate Not Found ❌");
         }
 
-        document.getElementById("search-box").classList.add("hidden");
-        document.getElementById("result-box").classList.remove("hidden");
-
-        document.getElementById("result-data").innerHTML = `
-            <div class="data-item"><span class="label">Deliverable Id :</span><br>${found.id}</div>
-            <div class="data-item"><span class="label">Published on :</span><br>${found.published}</div>
-            <div class="data-item"><span class="label">QR Code Status :</span><br><span style="color:green;">Validated</span></div>
-            <div class="data-item"><span class="label">NAME :</span><br>${found.name}</div>
-            <div class="data-item"><span class="label">ID :</span><br>${found.nid}</div>
-            <div class="data-item"><span class="label">ISSUED ON :</span><br>${found.issued}</div>
-            <div class="data-item"><span class="label">VALID UNTIL :</span><br>${found.valid}</div>
-            <div class="data-item"><span class="label">TYPE :</span><br>${found.type}</div>
-            <div class="data-item"><span class="label">MODEL :</span><br>${found.model}</div>
-            <div class="data-item"><span class="label">COMPANY :</span><br>${found.company}</div>
-            <div class="data-item"><span class="label">TRAINING LOCATION :</span><br>${found.location}</div>
-            <div class="data-item"><span class="label">TRAINER :</span><br>${found.trainer}</div>
-        `;
-
-    } catch (e) {
+    } catch (err) {
         alert("Error loading data.json");
-        console.log(e);
     }
 }
-
 </script>
 
 </body>
