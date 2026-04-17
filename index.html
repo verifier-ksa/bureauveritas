@@ -4,30 +4,46 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Certificate Verification</title>
-<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- SEARCH -->
-<div id="search-section" class="content-view">
-    <div class="search-card">
+<div class="content-view">
+
+    <!-- SEARCH -->
+    <div id="search-section" class="search-card">
         <h3>Please search your e-document by filling the document number.</h3>
 
-        <input type="text" id="cert-number" placeholder="">
+        <input type="text" id="cert-number" placeholder="e.g. 148-2026-022489-EN">
 
         <button class="search-btn" onclick="verifyCertificate()">Search Certificate</button>
     </div>
-</div>
 
-<!-- RESULT -->
-<div id="result-section" class="content-view hidden">
-    <div class="result-card">
-        <div class="status-circle">✔</div>
+    <!-- RESULT -->
+    <div id="result-section" class="result-card hidden">
+
+        <div class="top-area">
+            <div class="status-circle">✔</div>
+        </div>
+
         <div id="result-data"></div>
+
+        <p class="footer-text">
+            For any further information on this document, please contact the issuer of the document.
+        </p>
+
     </div>
+
 </div>
 
-<script src="./script.js"></script>
+<!-- 🔥 নিচের লিংক -->
+<div class="footer">
+    <a href="https://group.bureauveritas.com/" target="_blank">
+        Visit Bureau Veritas Website
+    </a>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
